@@ -1,0 +1,208 @@
+/* 기본 리셋 및 전역 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.2rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #000000;
+  background-color: transparent;
+  min-height: 100vh;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  display: block;
+  pointer-events: none;
+
+}
+
+/* 로고 타이틀 스타일 */
+header.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 4rem 0;
+}
+
+header.title h1 {
+  font-family: 'Arial Black', Arial, sans-serif;
+  font-weight: 1000;
+  font-size: 4rem;
+  color: #000000;
+  margin: 0;
+}
+
+/* 말풍선 본체 */
+.speech-bubble {
+  position: absolute;
+  left: calc(50% + 5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ffffff;
+  color: #000000;
+  padding: 0.1rem 1.2rem;
+  border: 1px solid #000000;
+  border-radius: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1001;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* 말풍선 꼬리 (테두리 역할) */
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  left: -7.5px;   /* 본체 왼쪽에 위치 */
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 7px solid #000000; /* 테두리 삼각형 */
+}
+
+/* 말풍선 꼬리 (본체 색상) */
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  left: -6px;    /* 본체 색상 삼각형 */
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 7px solid #ffffff;  /* 본체 배경색 삼각형 */
+}
+
+.speech-text {
+  display: inline-block;
+}
+
+/* 말풍선 숨김 상태 */
+.speech-bubble.hidden {
+  opacity: 0;
+  transform: translateY(-50%) translateX(-10px);
+}
+
+/* 보여질 때 */
+.speech-bubble.show {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+
+/* 헤더 메뉴 스타일 */
+header.menu {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  min-width: 200px;
+  padding: 3rem 10rem;
+  z-index: 100;
+}
+
+.menu_a {
+  text-decoration: none;
+  color: #000000;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: color 0.3s ease, transform 0.2s ease;
+  position: relative;
+}
+
+.menu_a:hover {
+  color: #000000;
+  transform: translateY(-2px);
+}
+
+.menu_a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 5px;
+  background-color: #000000;
+  transition: width 0.3s ease;
+}
+
+.menu_a:hover::after {
+  width: 100%;
+}
+
+.people {
+  text-decoration: none;
+  color: #000000;
+  text-align: right;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  min-width: 200px;
+  padding: 3rem 10rem;
+  z-index: 100;
+}
+
+.about-text p{
+  position: relative;
+  z-index: 10;
+  margin-left: 11rem;
+  margin-bottom: 0.5rem;
+  width: 300px; /* 텍스트 가독성을 위한 최대 너비 */
+  padding: 10px;
+  hyphens: none;
+  word-break: keep-all;
+  border: 1px solid #000000;
+  border-radius: 1rem;
+  background-color: #ffffff;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  header.menu {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  main {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header.menu {
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .menu_a {
+    font-size: 0.85rem;
+  }
+}
+
