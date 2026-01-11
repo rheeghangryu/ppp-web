@@ -38,6 +38,47 @@ const speechMessages = [
     }, delay);
   }
   
+  // 햄버거 메뉴 토글
+  const menuToggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('menu');
+  
+  if (menuToggle && menu) {
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      menu.classList.toggle('active');
+    });
+    
+    // 메뉴 링크 클릭 시 메뉴 닫기 (모바일)
+    const menuLinks = menu.querySelectorAll('.menu_a');
+    menuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          menuToggle.classList.remove('active');
+          menu.classList.remove('active');
+        }
+      });
+    });
+    
+    // 메뉴 외부 클릭 시 닫기
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768 && 
+          !menu.contains(e.target) && 
+          !menuToggle.contains(e.target) && 
+          menu.classList.contains('active')) {
+        menuToggle.classList.remove('active');
+        menu.classList.remove('active');
+      }
+    });
+  }
+
+  // 준비중 메시지 2초 후 숨기기
+  const comingSoon = document.getElementById('comingSoon');
+  if (comingSoon) {
+    setTimeout(() => {
+      comingSoon.classList.add('hidden');
+    }, 2000); // 2초 후 숨김
+  }
+
   // 시작
   window.addEventListener('DOMContentLoaded', () => {
     scheduleNextChange();
