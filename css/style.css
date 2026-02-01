@@ -206,10 +206,6 @@ header.menu {
   z-index: 100;
 }
 
-/* About page: fixed header 아래로 본문 내리기 */
-.about-text {
-  padding-top: 12rem; /* desktop 기본값 */
-}
 
 .about-text p{
   position: relative;
