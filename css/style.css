@@ -206,6 +206,11 @@ header.menu {
   z-index: 100;
 }
 
+/* About page: fixed header 아래로 본문 내리기 */
+.about-text {
+  padding-top: 12rem; /* desktop 기본값 */
+}
+
 .about-text p{
   position: relative;
   z-index: 10;
@@ -334,11 +339,14 @@ header.menu {
     padding: 1rem;
   }
 
+  .about-text {
+    padding-top: 6.5rem;
+  }
+
   .speech-bubble {
     left: 50%;
     top: 100%;
     transform: translateX(-50%);
-    margin-top: 1rem;
     padding: 0.1rem 1rem;
     font-size: 0.65rem;
   }
@@ -408,12 +416,15 @@ header.menu {
   .people p {
     font-size: 0.6rem;
   }
-
   .about-text p {
     margin-left: 1rem;
     width: calc(100% - 2rem);
     padding: 0.8rem;
     font-size: 0.65rem;
+  }
+
+  .about-text {
+    padding-top: 7.5rem;
   }
 
   .speech-bubble {
@@ -423,8 +434,8 @@ header.menu {
     margin-top: 1rem;
     padding: 0.1rem 0.8rem;
     font-size: 0.6rem;
-    white-space: normal;
-    max-width: 80%;
+    white-space: nowarp;
+
   }
 
   .speech-bubble::before {

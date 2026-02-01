@@ -7,6 +7,8 @@
   <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
 
   <title>Pick Random</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../css/random.css" />
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
@@ -33,12 +35,41 @@
     <p>RHEEGHANG 리강</p>
   </div>
 
-  <div class="coming-soon" id="comingSoon">
-    <p>준비중입니다...coming soon....</p>
+
+  <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
+    <div class="loading-logo" role=""status" aria-label="Loading">
+    <span>P</span><span>P</span><span>P</span>
+  </div>
   </div>
 
+  <div class="subject">
+    <p id="subject-data"></p>
+    <p class="subject-title">Subject</p>
+  </div>
+  <div class="rule">
+    <p class="rule-title">Rule</p>
+    <p id="rule-data"></p>
+  </div>
+
+  <div class="mode-toggle" id="modeToggle" data-mode="none" aria-label="모드 선택">
+    <div class="mode-toggle__hint" id="modeHint">모드를 선택해 주세요!<br>
+      Choose the mode!</div>
+    <div class="mode-title">MODE</div>
+    <div class="mode-toggle__track" role="group" aria-label="Mode">
+      <button class="mode-toggle__option" type="button" data-mode="D" aria-pressed="false">D</button>
+      <button class="mode-toggle__option" type="button" data-mode="R" aria-pressed="false">R</button>
+    </div>
+  </div>
+
+  <button class="pick-random" id="pickRandom" aria-label="랜덤 주제 선택">
+    <span>PICK RANDOM</span>
+  </button>
+  <!-- <div class="coming-soon" id="comingSoon">
+    <p>준비중입니다...coming soon....</p>
+  </div> -->
+
   <script src="../js/app.js" defer></script>
-  <script src="../js/sketch.js"></script>
+  <script src="../js/random.js" defer></script>
 </body>
 </html>
 
