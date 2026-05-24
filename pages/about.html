@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+  <link rel="stylesheet" href="https://use.typekit.net/gzd1lqq.css">
 
 
   <title>About</title>
@@ -19,15 +20,15 @@
     </div>
   </header>
 
-  <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기">
+  <button class="main-nav-toggle" id="mainNavToggle" aria-label="메뉴 열기">
     <span></span>
     <span></span>
     <span></span>
   </button>
-  <header class="menu" id="menu">
-    <a class="menu_a">ABOUT</a>
-    <a class="menu_a" href="archive.html">ARCHIVE</a>
-    <a class="menu_a" href="random.html">PICK RANDOM</a>
+  <header class="main-nav" id="mainNav">
+    <a class="main-nav__link" aria-current="page">ABOUT</a>
+    <a class="main-nav__link" href="archive.html">ARCHIVE</a>
+    <a class="main-nav__link" href="random.html">PICK RANDOM</a>
   </header>
 
   <div class="people">
@@ -47,6 +48,6 @@
   </main>
 
   <script src="../js/app.js" defer></script>
-  <script src="../js/moving-p.js"></script>
+  <script src="../js/sketch.js"></script>
 </body>
 </html>

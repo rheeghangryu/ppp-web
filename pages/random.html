@@ -4,12 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+  <script>
+    (function(d) {
+      var config = {
+        kitId: 'gzd1lqq',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;
+        if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);
+        try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+  </script>
 
   <title>Pick Random</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="../css/random.css" />
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/random.css" />
 </head>
 <body>
   <header class="title">
@@ -19,15 +30,15 @@
     </div>
   </header>
 
-  <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기">
+  <button class="main-nav-toggle" id="mainNavToggle" aria-label="메뉴 열기">
     <span></span>
     <span></span>
     <span></span>
   </button>
-  <header class="menu" id="menu">
-    <a class="menu_a" href="about.html">ABOUT</a>
-    <a class="menu_a" href="archive.html">ARCHIVE</a>
-    <a class="menu_a">PICK RANDOM</a>
+  <header class="main-nav" id="mainNav">
+    <a class="main-nav__link" href="about.html">ABOUT</a>
+    <a class="main-nav__link" href="archive.html">ARCHIVE</a>
+    <a class="main-nav__link" aria-current="page">PICK RANDOM</a>
   </header>
 
   <div class="people">
@@ -37,10 +48,25 @@
 
 
   <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
-    <div class="loading-logo" role=""status" aria-label="Loading">
+    <div class="loading-logo" role="status" aria-label="Loading">
     <span>P</span><span>P</span><span>P</span>
   </div>
   </div>
+
+  <!-- quarter list panels (1/4 and 3/4 of viewport width) -->
+  <aside class="quarter-panel quarter-panel--left" aria-label="Left list panel">
+    <div class="quarter-panel__inner">
+      <div class="quarter-panel__title" id="panel-title-left"></div>
+      <ol class="quarter-panel__list" id="list-left" aria-label="Left list"></ol>
+    </div>
+  </aside>
+
+  <aside class="quarter-panel quarter-panel--right" aria-label="Right list panel">
+    <div class="quarter-panel__inner">
+      <div class="quarter-panel__title" id="panel-title-right"></div>
+      <ul class="quarter-panel__list" id="list-right" aria-label="Right list"></ul>
+    </div>
+  </aside>
 
   <div class="subject">
     <p id="subject-data"></p>
@@ -72,4 +98,3 @@
   <script src="../js/random.js" defer></script>
 </body>
 </html>
-

@@ -55,7 +55,9 @@
 
 .loading-overlay{
     position:fixed;
-    inset: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 1000;
     display: none;
     place-items: center;
@@ -270,11 +272,147 @@
     letter-spacing: 0.5px;
     text-transform: uppercase;
     padding: 0.5rem 1rem;
-    border-radius: 1rem;
+    border-radius: 999px;
     border: 1px solid #000000;
     cursor: pointer;
     z-index: 1000;
     text-align: center;
+  }
+
+/* ===== Quarter list panels (1/4, 3/4) ===== */
+.quarter-panel {
+  position: fixed;
+  width: 300px;
+  max-width: min(390px, calc(50vw - 24px));
+  height: 75vh;
+
+  /* 밑면이 화면 바깥으로 살짝 나가게 */
+  bottom: -28px;
+
+  /* 등장 애니메이션: 기본은 화면 아래에 숨김 */
+  transform: translate(-50%, 110%);
+  opacity: 0;
+
+  /* 레이어 */
+  z-index: 20;
+
+  /* 박스 스타일 (원하면 조절) */
+  background: rgb(255, 255, 255);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.065), 0 3px 6px rgba(0, 0, 0, 0.077);
+  
+}
+
+/* 1/4, 3/4 지점에 배치 (박스 중심을 그 지점에 맞춤) */
+.quarter-panel--left {
+  left: 25vw;
+}
+
+.quarter-panel--right {
+  left: 75vw;
+}
+
+/* 내용: 박스 안에서 스크롤 */
+.quarter-panel__inner {
+  height: 100%;
+  padding: 14px 18px 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quarter-panel__title {
+  /* same typography as list body */
+  font-family: "sandoll-kwangsootwo", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.25;
+  letter-spacing: 0.2px;
+  text-align: center;
+}
+
+.quarter-panel__list {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  /* 서체 적용 */
+  font-family: "sandoll-kwangsootwo", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+
+  font-size: 1rem;
+  line-height: 1.25;
+  letter-spacing: 0.2px;
+  text-align: center;
+}
+
+.quarter-panel__item {
+  padding: 10px 6px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  word-break: keep-all;
+}
+
+/* 시트에서 배경색이 있는 셀(=사용불가) 표시 */
+.quarter-panel__item--disabled {
+  text-decoration: line-through;
+  opacity: 0.35;
+}
+
+.quarter-panel__item:last-child {
+  border-bottom: none;
+}
+
+/* mode가 none이 아닐 때 보이기 */
+body[data-mode="R"] .quarter-panel,
+body[data-mode="D"] .quarter-panel {
+  opacity: 1;
+}
+
+/* 등장 애니메이션(아래에서 올라오기) */
+.quarter-panel.is-animating-in {
+  animation: panelRise 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes panelRise {
+  from {
+    transform: translate(-50%, 110%);
+    opacity: 0;
+  }
+  to {
+    /* bottom:-28px 유지 → 밑면이 화면 밖 */
+    transform: translate(-50%, 0%);
+    opacity: 1;
+  }
+}
+
+/* 작은 화면(모바일)에서는 2개가 겹치지 않게 스택 */
+@media (max-width: 900px) {
+  .quarter-panel {
+    width: min(390px, calc(100vw - 48px));
+    max-width: calc(100vw - 48px);
+    height: 42vh;
+    left: 50vw;
+  }
+
+  .quarter-panel--right {
+    bottom: calc(-28px + 44vh);
+  }
+}
+
+  /* Disable button when data-mode is none */
+  body[data-mode="none"] .pick-random {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: default;
+  }
+  body[data-mode="none"] .pick-random[disabled] {
+    pointer-events: none;
   }
 
   @media (max-width: 480px) {
