@@ -15,6 +15,7 @@ body {
   color: #000000;
   background-color: transparent;
   min-height: 100vh;
+  word-break: keep-all;
 }
 
 canvas {

@@ -1,0 +1,348 @@
+.archive-main {
+    padding-bottom: 4rem;
+    padding-left: 10rem;
+    padding-right: 10rem;
+  }
+  
+  /* =============================================
+     필터 바
+  ============================================= */
+  .filter-bar {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  
+  .filter-btn {
+    background: transparent;
+    border: 1px solid #000000;
+    border-radius: 999px;
+    padding: 0.25rem 1rem;
+    font-family: 'helvetica-neue-lt-pro', Arial, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  
+  .filter-btn:hover,
+  .filter-btn.active {
+    background: #000000;
+    color: #ffffff;
+  }
+  
+  /* =============================================
+     포스터 그리드
+  ============================================= */
+  .poster-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  
+  .poster-card {
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.25s ease;
+    background: transparent;
+  }
+  
+  .poster-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .poster-card__image-wrap {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .poster-card__image-wrap img {
+    width: 95%;
+    height: 95%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.4s ease;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
+  }
+  
+  .poster-card:hover .poster-card__image-wrap img {
+    transform: scale(1.03);
+  }
+  
+  .poster-card__info {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .poster-card__title {
+    font-weight: 800;
+  }
+  
+  .poster-card__designer {
+    opacity: 0.5;
+  }
+  
+  /* =============================================
+     팝업 — 오버레이
+  ============================================= */
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .popup-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  /* =============================================
+     팝업 — 화살표 (팝업 바깥, 오버레이 안)
+     팝업과 독립적으로 위치시켜서 모바일 레이아웃에 영향 없음
+  ============================================= */
+  .popup-nav {
+    position: absolute;       /* 오버레이 기준 */
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 999px;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+    z-index: 10;
+  }
+  
+  .popup-nav:hover {
+    background: #000000;
+    color: #ffffff;
+  }
+  
+  .popup-nav--prev { left: max(1rem, calc(50% - 460px)); }  /* 팝업 왼쪽 바깥 */
+  .popup-nav--next { right: max(1rem, calc(50% - 460px)); } /* 팝업 오른쪽 바깥 */
+  
+  .popup-nav:disabled {
+    opacity: 0.2;
+    cursor: default;
+    pointer-events: none;
+  }
+  
+  /* =============================================
+     팝업 — 본체
+  ============================================= */
+  .popup {
+    background: #ffffff;
+    border-radius: 1rem;
+    border: 1px solid #000000;
+    width: min(860px, 80vw);    /* 화살표 공간 확보용으로 90vw → 80vw */
+    max-height: 90vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;            /* 내부 스크롤은 각 섹션이 담당 */
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+  }
+  
+  .popup-overlay.active .popup {
+    transform: scale(1);
+  }
+  
+  /* =============================================
+     팝업 — 닫기 버튼
+  ============================================= */
+  .popup__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 999px;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+  }
+  
+  .popup__close:hover {
+    opacity: 0.7;
+  }
+  
+  /* =============================================
+     팝업 — 이미지
+  ============================================= */
+  .popup__image-wrap {
+    /* aspect-ratio 대신 height로 고정 — 모바일 세로 쌓기에서도 안정적 */
+    height: 100%;
+    min-height: 300px;
+    overflow: hidden;
+    border-radius: 1rem 0 0 1rem;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .popup__image-wrap img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;         /* cover → contain: 포스터 전체 보이도록 */
+    display: block;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
+  }
+  
+  /* =============================================
+     팝업 — 텍스트 정보
+  ============================================= */
+  .popup__info {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    overflow-y: auto;            /* 텍스트가 길면 이 영역만 스크롤 */
+    max-height: 90vh;
+  }
+  
+  .popup__title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    padding-right: 2.5rem;       /* 닫기 버튼과 안 겹치게 */
+  }
+  
+  .popup__designer {
+    font-weight: 800;
+    font-size: 0.65rem;
+    opacity: 0.5;
+  }
+  
+  .popup__date {
+    font-size: 0.65rem;
+    opacity: 0.4;
+    word-break: keep-all;
+  }
+  
+  /* Subject / Rule 배지 */
+  .popup__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .popup__meta > div {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 0.5rem;
+    padding: 0.05rem 0.75rem;
+    border: 1px solid #000000;
+    border-radius: 999px;
+    background: #ffffff;
+    width: fit-content;
+    max-width: 100%;
+  }
+  
+  .popup__meta > div > span {
+    word-break: keep-all;
+    hyphens: none;
+    font-size: 0.65rem;
+  }
+  
+  .popup__label {
+    font-weight: 800;
+    opacity: 0.4;
+  }
+  
+  .popup__description {
+    line-height: 1.6;
+    opacity: 0.7;
+    word-break: keep-all;
+  }
+  
+  /* =============================================
+     반응형 — 태블릿
+  ============================================= */
+  @media (max-width: 1024px) {
+    .archive-main {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+  
+    .poster-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* =============================================
+     반응형 — 모바일
+  ============================================= */
+  @media (max-width: 768px) {
+    .archive-main {
+      padding-top: 5rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  
+    .poster-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+  
+    /* 화살표 — 팝업 아래로 이동 (모바일에서 양옆 공간 없음) */
+    .popup-nav {
+      top: auto;
+      bottom: 1rem;
+      transform: none;
+    }
+  
+    .popup-nav--prev {
+      left: calc(50% - 3rem);
+    }
+  
+    .popup-nav--next {
+      right: calc(50% - 3rem);
+    }
+  
+    /* 팝업 — 세로 레이아웃 */
+    .popup {
+      grid-template-columns: 1fr;
+      width: min(480px, 92vw);
+      max-height: 85vh;           /* 화살표 공간 확보 */
+      overflow-y: auto;           /* 전체가 스크롤 */
+    }
+  
+    .popup__image-wrap {
+      height: 55vw;               /* 뷰포트 기준 고정 높이 — 찌그러짐 방지 */
+      min-height: 200px;
+      border-radius: 1rem 1rem 0 0;
+    }
+  
+    .popup__info {
+      max-height: none;           /* 모바일은 popup 전체가 스크롤하므로 해제 */
+      overflow-y: visible;
+    }
+  }

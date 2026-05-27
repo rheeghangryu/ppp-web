@@ -3,41 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <link rel="stylesheet" href="https://use.typekit.net/gzd1lqq.css">
-
   <title>Archive</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/archive.css" />  <!-- 새로 만들 CSS -->
 </head>
 <body>
+
+  <!-- 공통 헤더 (기존 동일) -->
   <header class="title">
     <h1>PPP</h1>
     <div class="speech-bubble hidden" id="speechBubble">
       <span class="speech-text" id="speechText">Hello Punny Poster Pals!</span>
     </div>
   </header>
-
   <button class="main-nav-toggle" id="mainNavToggle" aria-label="메뉴 열기">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </button>
   <header class="main-nav" id="mainNav">
     <a class="main-nav__link" href="about.html">ABOUT</a>
     <a class="main-nav__link" href="archive.html" aria-current="page">ARCHIVE</a>
     <a class="main-nav__link" href="random.html">PICK RANDOM</a>
   </header>
-
   <div class="people">
-    <a class="main-nav__link" href="https://www.instagram.com/nanun.dandan/" target="_blank" rel="noopener noreferrer">DANDAN 단단</a>
-    <a class="main-nav__link" href="https://www.instagram.com/rheeghang8.0/" target="_blank" rel="noopener noreferrer">RHEEGHANG 리강</a>
+    <p>DANDAN 단단</p>
+    <p>RHEEGHANG 리강</p>
   </div>
 
-  <div class="coming-soon" id="comingSoon">
-    <p>준비중입니다...coming soon...</p>
+  <!-- 아카이브 본문 -->
+  <main class="archive-main">
+
+    <!-- 태그 필터 바 (JS가 버튼 채워줌) -->
+    <div class="filter-bar" id="filterBar"></div>
+
+    <!-- 포스터 그리드 (JS가 카드 채워줌) -->
+    <div class="poster-grid" id="posterGrid"></div>
+
+  </main>
+
+  <!-- 팝업 오버레이 -->
+  <div class="popup-overlay" id="popupOverlay">
+  <!-- 화살표 — 팝업 밖, 오버레이 안 -->
+  <button class="popup-nav popup-nav--prev" id="popupPrev" aria-label="이전 포스터">&lsaquo;</button>
+  <button class="popup-nav popup-nav--next" id="popupNext" aria-label="다음 포스터">&rsaquo;</button>
+
+  <div class="popup">
+    <button class="popup__close" id="popupClose" aria-label="닫기">✕</button>
+
+      <div class="popup__image-wrap">
+        <img id="popupImage" src="" alt="" />
+      </div>
+
+      <div class="popup__info">
+        <h2 id="popupTitle" class="popup__title"></h2>
+        <p id="popupDesigner" class="popup__designer"></p>
+        <p id="popupDate" class="popup__date"></p>
+        <div class="popup__meta">
+          <div>
+            <span class="popup__label">Subject</span>
+            <span id="popupSubject"></span>
+          </div>
+          <div>
+            <span class="popup__label">Rule</span>
+            <span id="popupRule"></span>
+          </div>
+        </div>
+        <p id="popupDescription" class="popup__description"></p>
+      </div>
+    <!-- 기존 팝업 내용 그대로 -->
   </div>
 
+</div>
+
+  <!-- data.js 먼저, archive.js는 그 다음 -->
+  <script src="../js/data.js"></script>
   <script src="../js/app.js" defer></script>
+  <script src="../js/archive.js" defer></script>
+
 </body>
 </html>
